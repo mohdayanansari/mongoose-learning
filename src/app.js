@@ -47,29 +47,29 @@ const ProductList = new mongoose.model("ProductList", productListSchema);
 // const createDocument = async () => {
 //   try {
 //     const onePlus = new ProductList({
-//       name: "one plus",
-//       productType: "Electronic",
-//       Stock: 43,
+//       name: "Book",
+//       productType: "Stationary",
+//       Stock: 5555555,
 //       COD: true,
 //       active: true,
 //     });
 //     const herman = new ProductList({
-//       name: "herman infinity",
-//       productType: "Electronic",
-//       Stock: 45,
+//       name: "Pan",
+//       productType: "Kitchen Accessories",
+//       Stock: 124,
 //       COD: true,
 //       active: true,
 //     });
 //     const boat = new ProductList({
-//       name: "boat",
-//       productType: "Electronic",
-//       Stock: 12,
-//       COD: false,
+//       name: "Pants",
+//       productType: "Cloths",
+//       Stock: 175,
+//       COD: true,
 //       active: true,
 //     });
 //     const realme = new ProductList({
-//       name: "realme",
-//       productType: "Electronic",
+//       name: "Shirt",
+//       productType: "Cloths",
 //       Stock: 19,
 //       COD: true,
 //       active: true,
@@ -86,6 +86,7 @@ const ProductList = new mongoose.model("ProductList", productListSchema);
 //   }
 // };
 // createDocument();
+
 // Todo::: Reading the documents
 // const getDocument = async () => {
 // const result = await ProductList.find({Stock: 19}).select({name:1});      //* TO show only one info
@@ -103,3 +104,55 @@ const ProductList = new mongoose.model("ProductList", productListSchema);
 //   console.log(result);
 // };
 // updateDocument();
+
+// Todo::: Querying by comparison oprators
+//* {$gt: } || {$gte: } || {$lt: } || {$lte: } --greater than have to pass in object || --greater than equal to
+//* qurying by array(if the data falls in the query it'll appear) {$in: ["somthing", "somthing", "somthing",]}
+//* qurying by array(if the data is satisfy the query the rest data will appear) {$nin: ["somthing", "somthing", "somthing",]}
+// const getDocumentbyQuery = async () => {
+//   const result = await ProductList.find({ productType: {$in: ["Cloths", "Stationary"]} }).select({
+//     name: 1,
+//     Stock: 1,
+//   });
+//   console.log(result);
+// };
+// getDocumentbyQuery();
+
+// Todo::: Querying by Logical Oprators |||| or || and || nor || not ||||
+// const getDocumentbyLogical = async () => {
+//   try {
+//     const result = await ProductList.find({ $or: [{productType: "Electronic"}, {productType: "Cloths"}] }).select({
+//       name: 1,
+//     });
+//     console.log(result);
+//   } catch (e) {
+//     console.log(e);
+//   }
+// };
+// getDocumentbyLogical();
+
+// Todo::: Sorting and Count Query Methods
+// Todo::Count
+// const getDocumentbyCount = async () => {
+//   try {
+//     const result = await ProductList.find({
+//       $or: [{ productType: "Stationary" }, { productType: "Cloths" }],
+//     }).select({ name: 1 }).countDocuments();               // new countDocuments || count
+//     console.log(result);
+//   } catch (e) {
+//     console.log(e);
+//   }
+// };
+// getDocumentbyCount();
+
+// Todo::Sorting
+const getDocumentbySorting = async () => {
+  try {
+    const result = await ProductList.find({ productType: "Electronic"  }).select({ name: 1 }).sort({name: -1});
+    console.log(result);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+getDocumentbySorting();
