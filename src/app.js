@@ -146,13 +146,43 @@ const ProductList = new mongoose.model("ProductList", productListSchema);
 // getDocumentbyCount();
 
 // Todo::Sorting
-const getDocumentbySorting = async () => {
-  try {
-    const result = await ProductList.find({ productType: "Electronic"  }).select({ name: 1 }).sort({name: -1});
-    console.log(result);
-  } catch (e) {
-    console.log(e);
-  }
-};
+// const getDocumentbySorting = async () => {
+//   try {
+//     const result = await ProductList.find({ productType: "Electronic"  }).select({ name: 1 }).sort({name: -1});
+//     console.log(result);
+//   } catch (e) {
+//     console.log(e);
+//   }
+// };
+// getDocumentbySorting();
 
-getDocumentbySorting();
+//  Todo::: Update the documents
+// const updateDocument = async (_id) => {
+// try {
+// const result = await ProductList.findByIdAndUpdate(
+// { _id },
+// {
+// $set: { name: "Moccha" },
+// },
+// {
+// new: true,                          //* to get letest values
+// useFindAndModify: false,            //* removes the deprication warnings
+// }
+// );
+// console.log(result);
+// } catch (err) {
+// console.log(err);
+// }
+// };
+// updateDocument("615c7b60d08f87b0d4431e79");
+
+// Todo:: Delete the data in documents
+// const deleteDocument = async (_id) => {
+  // try {
+    //*remove || deleteOne || deleteMany || findByIdAndDelete(shows what data is deleted)
+    // const result = await ProductList.deleteOne({ _id });    
+  // } catch (e) {
+    // console.log(e);
+  // }
+// };
+// deleteDocument("615c820385702b4c0d00634c");
