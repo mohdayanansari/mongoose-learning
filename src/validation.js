@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
-const { id } = require("monk");
+const validator = require("validator");
 
 mongoose
   .connect("mongodb://localhost:27017/myshop", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true,
   })
   .then(() => console.log("Connection is successfull...🚀"))
   .catch((e) => console.log(e));
@@ -31,7 +32,16 @@ const userSchema = new mongoose.Schema({
     enum: ["male", "female", "other"], //checkes if the gender is male female or other
   },
   phone: Number,
-  email: String,
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    validate(value) {
+      if (!validator.isEmail(value)) {
+        throw new Error("Email is invalid!");                         //Validation through validator package....
+      }
+    },
+  },
   address: String,
   active: Boolean,
   totalOrders: {
@@ -57,17 +67,17 @@ const User = new mongoose.model("User", userSchema);
 
 const createDocument = async () => {
   try {
-    const user_1 = new User({
-      name: "Arun Sharma",
-      userName: "arunss",
-      gender: "male",
-      phone: 7532125220,
-      email: "arun@gmail.com",
-      address: "Delhi",
-      active: false,
-      totalOrders: 54,
-      password: "abcdefghijk",
-    });
+    // const user_1 = new User({
+    //   name: "Rohan",
+    //   userName: "rom",
+    //   gender: "male",
+    //   phone: 7532125220,
+    //   email: "aruncom",
+    //   address: "Delhi",
+    //   active: false,
+    //   totalOrders: 54,
+    //   password: "abscdefghijk",
+    // });
     // const user_2 = new User({
     //   name: "Aman Ansari",
     //   userName: "amananss",
@@ -114,4 +124,4 @@ const createDocument = async () => {
     console.log(e);
   }
 };
-createDocument();
+// createDocument();
